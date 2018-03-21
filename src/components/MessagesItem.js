@@ -1,12 +1,5 @@
 import React from 'react';
-
-/** Demonstrates the use of inline styles */
-const styles = {
-  borderRadius: '50%',
-  position: 'relative',
-  top: '5px',
-  marginRight: '5px'
-};
+import PropTypes from 'prop-types';
 
 const MessagesItem = ({ item, currentUser }) => {
   const classes =
@@ -14,12 +7,17 @@ const MessagesItem = ({ item, currentUser }) => {
   return (
     <li className={classes}>
       <span className="User">
-        <img src={item.avatar} alt="avatar" width="20px" style={styles} />
+        <img src={item.avatar} alt="avatar" className="Avatar" />
         {item.username}:
       </span>
       <span className="Message">{item.message}</span>
     </li>
   );
+};
+
+MessagesItem.propTypes = {
+  item: PropTypes.object.isRequired,
+  currentUser: PropTypes.object.isRequired
 };
 
 export default MessagesItem;
