@@ -6,10 +6,10 @@ const MessagesItem = ({ item, currentUser }) => {
     'MessageItem' + (item.username === currentUser.username ? ' Current' : '');
   return (
     <li className={classes}>
-      <span className="User">
+      <div className="User">
         <img src={item.avatar} alt="avatar" className="Avatar" />
-        {item.username}:
-      </span>
+        {item.username}
+      </div>
       <span className="Message">{item.message}</span>
     </li>
   );

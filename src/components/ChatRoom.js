@@ -46,16 +46,17 @@ class ChatRoom extends Component {
   };
 
   render() {
+    const { user } = this.props;
     return (
       <div>
         <h1>Chat Rooom</h1>
         <div className="ChatRoom">
-          <Users users={this.props.connectedUsers} />
+          <Users
+            users={this.props.connectedUsers}
+            currentUserName={user.username}
+          />
           <div>
-            <Messages
-              data={this.state.messages}
-              currentUser={this.props.user}
-            />
+            <Messages data={this.state.messages} currentUser={user} />
             <form onSubmit={this.addMessage}>
               <input type="text" ref="message" />
               <button type="submit">Send</button>

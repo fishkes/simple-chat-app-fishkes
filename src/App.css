@@ -1,5 +1,10 @@
+/* GENERAL STYLING */
 html {
   box-sizing: border-box;
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
 }
 *,
 *:before,
@@ -22,7 +27,6 @@ h1 {
 
 input {
   padding: 10px 10px;
-  border: 1px solid #ccc;
 }
 
 .App {
@@ -36,15 +40,18 @@ input {
   width: 100%;
   justify-content: center;
   align-items: center;
+  background: url('./assets/bg.jpeg') no-repeat;
+  background-size: cover;
 }
+
+/* CHAT ROOM */
 
 .ChatRoom {
   display: flex;
 }
 
 .ChatRoom .MessagesList {
-  border: 1px solid #ccc;
-  background: #fff;
+  background: rgba(0, 0, 0, 0.8);
   height: 400px;
   width: 500px;
   padding: 20px;
@@ -63,11 +70,14 @@ input {
 
 .ChatRoom input {
   flex: 1;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  border: none;
 }
 
 .ChatRoom button {
   height: 36px;
-  border: 1px solid #1f6d90;
+  border: none;
   border-left: none;
   padding: 0 10px;
   background: #1f6d90;
@@ -81,8 +91,30 @@ input {
   background: #000;
 }
 
+.MessageItem {
+  max-width: 200px;
+  background: #ece5dd;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.MessageItem.Current,
+.UsersList .Current {
+  background: #dcf8c6;
+}
+
+.MessageItem.Current {
+  margin-left: auto;
+}
+.MessageItem .User {
+  color: #ff8971;
+  margin-bottom: 10px;
+}
+/* LOGIN FORM */
+
 .LoginForm {
-  background: #fff;
+  background: rgba(0, 0, 0, 0.8);
   padding: 20px;
 }
 
@@ -90,32 +122,24 @@ input {
   display: block;
   font-size: 18px;
   margin-bottom: 10px;
+  color: white;
 }
 
-.MessageItem {
-  background: #ece5dd;
-  padding: 10px;
-  border-radius: 8px;
-  margin-bottom: 10px;
-}
-
-.MessageItem.Current {
-  background: #dcf8c6;
-}
+/* USERS LIST */
 
 .UsersList {
-  background: #fff;
+  background: rgba(0, 0, 0, 0.8);
   margin-right: 10px;
   flex: 0 0 200px;
   padding: 20px;
-  border: 1px solid #ccc;
 }
 .UsersList h3 {
   margin-bottom: 10px;
+  color: #fff;
 }
 .UsersList li {
   padding: 10px;
-  background: lemonchiffon;
+  background: #ece5dd;
   margin-bottom: 5px;
 }
 
