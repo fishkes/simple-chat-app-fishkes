@@ -4,10 +4,12 @@ const server = require('http').Server(app);
 const io = require('socket.io')(server);
 const uniqid = require('uniqid');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 const CONSTANTS = require('./common/const');
 
 const messages = [];
 
+app.use(cors());
 app.use(bodyParser.json());
 
 app.use('/static', express.static('build/static'));
@@ -32,7 +34,7 @@ io.on('connection', function(socket) {
     messages.push({
       user: data.user.username,
       message: data.message,
-      id: uniqid(),
+      id: data.id,
       avatar: data.user.avatar
     });
     io.emit(CONSTANTS.CLIENT_MESSAGE, messages);
