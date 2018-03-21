@@ -22,12 +22,12 @@ app.post('/login', function(req, res) {
   user.avatar = `https://api.adorable.io/avatars/5/${
     user.username
   }@adorable.png`;
+  io.emit(CONSTANTS.CLIENT_MESSAGE, messages);
   res.json(user);
 });
 
 io.on('connection', function(socket) {
-  console.log('a user connected');
-
+  io.emit(CONSTANTS.CLIENT_MESSAGE, messages);
   socket.on(CONSTANTS.SERVER_MESSAGE, function(data) {
     messages.push({
       user: data.user.username,

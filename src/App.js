@@ -28,9 +28,8 @@ class App extends Component {
   componentWillMount() {
     this.socket = socketIOClient(this.state.endpoint);
     this.socket.on(CONSTANTS.CLIENT_MESSAGE, data => {
-      let newMessages = [...this.state.messages];
-      newMessages.push(data);
-      this.setState({ messages: newMessages });
+      console.log('data', data);
+      this.setState({ messages: data });
     });
   }
 
@@ -74,7 +73,6 @@ class App extends Component {
       this.setState({ user: response.data });
       localStorage.setItem('user', JSON.stringify(response.data));
     });
-    // this.setState({ user });
   };
 
   render() {
