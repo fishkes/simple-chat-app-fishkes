@@ -63,3 +63,14 @@ h1 {
   display: block;
   font-size: 18px;
 }
+
+.MessageItem {
+  background: #ece5dd;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.MessageItem.Current {
+  background: #dcf8c6;
+}

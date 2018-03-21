@@ -30,14 +30,14 @@ app.post('/login', function(req, res) {
 
 io.on('connection', function(socket) {
   io.emit(CONSTANTS.CLIENT_MESSAGE, messages);
-  socket.on(CONSTANTS.SERVER_MESSAGE, function(data) {
+  socket.on(CONSTANTS.SERVER_MESSAGE, data => {
     messages.push({
-      user: data.user.username,
+      username: data.user.username,
       message: data.message,
       id: data.id,
       avatar: data.user.avatar
     });
-    io.emit(CONSTANTS.CLIENT_MESSAGE, messages);
+    socket.broadcast.emit(CONSTANTS.CLIENT_MESSAGE, messages);
   });
 });
 

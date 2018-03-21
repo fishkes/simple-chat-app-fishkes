@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import uniqid from 'uniqid';
+
 import Messages from './Messages';
-import socket from '../../common/socket';
-const CONSTANTS = require('../../common/const');
+import socket from '../socket';
+import CONSTANTS from '../../common/const';
 
 class ChatRoom extends Component {
   state = {
@@ -23,10 +24,9 @@ class ChatRoom extends Component {
     const messageId = uniqid();
 
     //I would like to add the message immidiatley as the user enters it
-    //Later on the messages would be updated
     const newMessage = {
       avatar: user.avatar,
-      user: user.username,
+      username: user.username,
       message: text,
       id: messageId
     };
@@ -47,7 +47,7 @@ class ChatRoom extends Component {
       <div>
         <h1>Chat Rooom</h1>
         <div className="ChatBox">
-          <Messages data={this.state.messages} />
+          <Messages data={this.state.messages} currentUser={this.props.user}/>
           <form onSubmit={this.addMessage}>
             <input type="text" ref="message" />
           </form>

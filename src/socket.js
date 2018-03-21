@@ -1,5 +1,5 @@
 import socketIOClient from 'socket.io-client';
-import CONSTANTS from './const';
+import CONSTANTS from '../common/const';
 
 let _socket;
 

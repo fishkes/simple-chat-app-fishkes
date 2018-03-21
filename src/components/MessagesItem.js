@@ -8,14 +8,18 @@ const styles = {
   marginRight: '5px'
 };
 
-const MessagesItem = ({ item }) => (
-  <li>
-    <span className="User">
-      <img src={item.avatar} alt="avatar" width="20px" style={styles} />
-      {item.user}:
-    </span>
-    <span className="Message">{item.message}</span>
-  </li>
-);
+const MessagesItem = ({ item, currentUser }) => {
+  const classes =
+    'MessageItem' + (item.username === currentUser.username ? ' Current' : '');
+  return (
+    <li className={classes}>
+      <span className="User">
+        <img src={item.avatar} alt="avatar" width="20px" style={styles} />
+        {item.username}:
+      </span>
+      <span className="Message">{item.message}</span>
+    </li>
+  );
+};
 
 export default MessagesItem;
