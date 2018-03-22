@@ -24,3 +24,7 @@ The browser will automatically open on http://localhost:3000
 * then start the server - `npm start server` or `yarn server`
 
 Browse to http://localhost:4000
+
+#### To run tests:
+
+`npm test` or `yarn test`

@@ -16,7 +16,8 @@ class App extends Component {
     connectedUsers: []
   };
 
-  componentWillMount() {
+  constructor(props) {
+    super(props);
     socket.init();
     socket.subscribe(CONSTANTS.CONNECTED_USERS, connectedUsers => {
       this.setState({ connectedUsers });
@@ -32,6 +33,7 @@ class App extends Component {
       this.setState({ user: response.data });
       //save user so it will auto login next time
       localStorage.setItem('user', JSON.stringify(response.data));
+      socket.send(CONSTANTS.CLIENT_CONNECTED, response.data);
     });
   };
 
