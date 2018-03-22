@@ -18,7 +18,7 @@ class App extends Component {
 
   componentWillMount() {
     socket.init();
-    socket.register(CONSTANTS.CONNECTED_USERS, connectedUsers => {
+    socket.subscribe(CONSTANTS.CONNECTED_USERS, connectedUsers => {
       this.setState({ connectedUsers });
     });
 

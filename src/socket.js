@@ -7,7 +7,7 @@ const socket = {
   init() {
     _socket = socketIOClient(CONSTANTS.URL);
   },
-  register(topic, cb) {
+  subscribe(topic, cb) {
     _socket.on(topic, cb);
   },
   send(topic, data) {

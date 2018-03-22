@@ -13,11 +13,7 @@ class ChatRoom extends Component {
   };
 
   componentWillMount() {
-    socket.register(CONSTANTS.CLIENT_MESSAGE, data => {
-      // const {messages} = this.state;
-      // if (messages[messages.length - 1].id !== data[data.length - 1].id){
-
-      // }
+    socket.subscribe(CONSTANTS.CLIENT_MESSAGE, data => {
       this.setState({ messages: data });
     });
   }

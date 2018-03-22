@@ -19,6 +19,12 @@ app.get('/', function(req, res) {
   res.sendFile(__dirname + '/build/index.html');
 });
 
+/**
+ * On login:
+ * 1. Add the user to connected users list
+ * 2. publish the new list and also the message so the new user gets the messages history
+ * 3. return the newly created user object
+ */
 app.post('/login', function(req, res) {
   let user = req.body;
   if (!connectedUsers.find(item => item.id === user.id)) {
@@ -37,11 +43,14 @@ app.post('/login', function(req, res) {
 
 io.on('connection', function(socket) {
   console.log('socket connected');
-  //emit messages when a client connects, so the new client gets them
+  //emit messages and connected users when a client connects,
+  // that way the new client gets the message history and the rest of the clients
+  //are notified on the new user
   io.emit(CONSTANTS.CLIENT_MESSAGE, messages);
   io.emit(CONSTANTS.CONNECTED_USERS, connectedUsers);
 
   //on message recieved, broadcast it to the rest of the world
+  //but not to the one that sent the message
   socket.on(CONSTANTS.SERVER_MESSAGE, message => {
     messages.push(message);
     socket.broadcast.emit(CONSTANTS.CLIENT_MESSAGE, messages);
