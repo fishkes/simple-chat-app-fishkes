@@ -12,10 +12,12 @@ class ChatRoom extends Component {
     messages: []
   };
 
-  componentWillMount() {
+  constructor(props) {
+    super(props);
     socket.subscribe(CONSTANTS.CLIENT_MESSAGE, data => {
       this.setState({ messages: data });
     });
+   
   }
 
   addMessage = e => {
@@ -36,7 +38,7 @@ class ChatRoom extends Component {
     this.setState({ messages: [...this.state.messages, newMessage] });
 
     //send the message to the rest of the clients
-    socket.send(CONSTANTS.SERVER_MESSAGE, newMessage);
+    socket.send(CONSTANTS.DISTRIBUTE_MESSAGE, newMessage);
 
     this.refs.message.value = '';
   };

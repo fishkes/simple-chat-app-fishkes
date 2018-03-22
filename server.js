@@ -35,29 +35,32 @@ app.post('/login', function(req, res) {
 
     connectedUsers.push(user);
   }
-
-  io.emit(CONSTANTS.CONNECTED_USERS, connectedUsers);
-  io.emit(CONSTANTS.CLIENT_MESSAGE, messages);
   res.json(user);
 });
 
 io.on('connection', function(socket) {
   console.log('socket connected');
-  //emit messages and connected users when a client connects,
-  // that way the new client gets the message history and the rest of the clients
-  //are notified on the new user
-  io.emit(CONSTANTS.CLIENT_MESSAGE, messages);
-  io.emit(CONSTANTS.CONNECTED_USERS, connectedUsers);
-
   //on message recieved, broadcast it to the rest of the world
   //but not to the one that sent the message
-  socket.on(CONSTANTS.SERVER_MESSAGE, message => {
+  socket.on(CONSTANTS.DISTRIBUTE_MESSAGES, message => {
     messages.push(message);
     socket.broadcast.emit(CONSTANTS.CLIENT_MESSAGE, messages);
   });
 
+  //listen to when a new user is connected and send the
+  //the messages and connected users
+  socket.on(CONSTANTS.CLIENT_CONNECTED, user => {
+    console.log('new user connected:', user.username)
+    socket.userId = user.id;
+    io.emit(CONSTANTS.CONNECTED_USERS, connectedUsers);
+    io.emit(CONSTANTS.CLIENT_MESSAGE, messages);
+  });
+
+  //When a user disconnects, remove him from the connected users list
   socket.on('disconnect', function() {
-    console.log('socket disconnected');
+    console.log('socket disconnected:', this.userId);
+    const filtered = connectedUsers.filter(user => user.id !== this.userId);
+    io.emit(CONSTANTS.CONNECTED_USERS, filtered);
     socket.disconnect(true);
   });
 });
